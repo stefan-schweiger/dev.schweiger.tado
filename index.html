@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- The '/homey.js' script must be included in your settings view to work -->
+    <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
+  </head>
+  <body>
+    <header class="homey-header">
+      <h1 class="homey-title" data-i18n="settings.title">
+        <!-- This will be filled with the translated string with key 'settings.title'. -->
+      </h1>
+    </header>
+
+    <fieldset class="homey-form-fieldset">
+      <div class="homey-form-group">
+        <label class="homey-form-label" for="host" data-i18n="settings.server">
+          <!-- Localized -->
+        </label>
+        <input class="homey-form-input" id="server" type="text" value="" placeholder="mqtt://192.168.0.100:1883" />
+      </div>
+      <div class="homey-form-group">
+        <label class="homey-form-label" for="topic" data-i18n="settings.topic">
+          <!-- Localized -->
+        </label>
+        <input class="homey-form-input" id="topic" type="text" value="" />
+      </div>
+      <div class="homey-form-group">
+        <label class="homey-form-label" for="username" data-i18n="settings.username">
+          <!-- Localized -->
+        </label>
+        <input class="homey-form-input" id="username" type="text" value="" />
+      </div>
+      <div class="homey-form-group">
+        <label class="homey-form-label" for="password" data-i18n="settings.password">
+          <!-- Localized -->
+        </label>
+        <input class="homey-form-input" id="password" type="password" value="" />
+      </div>
+    </fieldset>
+
+    <button id="save" class="homey-button-primary-full">Save changes</button>
+
+    <script type="text/javascript">
+      // a method named 'onHomeyReady' must be present in your code
+      function onHomeyReady(Homey) {
+        // Tell Homey we're ready to be displayed
+        Homey.ready();
+
+        const settings = ['server', 'topic', 'username', 'password'];
+
+        var elements = {};
+        settings.forEach((s) => {
+          elements[s] = document.getElementById(s);
+          Homey.get(s, (err, value) => {
+            if (err) return Homey.alert(err);
+            elements[s].value = value ?? '';
+          });
+        });
+        var saveElement = document.getElementById('save');
+
+        saveElement.addEventListener('click', (e) => {
+          saveElement.classList.add('is-loading');
+          settings.forEach((s) =>
+            Homey.set(s, elements[s].value, (err) => {
+              if (err) return Homey.alert(err);
+            }),
+          );
+
+          Homey.api('POST', '/connect', undefined, (err, res) => {
+            saveElement.classList.remove('is-loading');
+            if (err) return Homey.alert(err);
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+{
+  "triggers": [
+    {
+      "id": "target_temperature_changed.hot_water",
+      "title": { "en": "Hot water target temperature changed" },
+      "tokens": [
+        {
+          "name": "target_temperature",
+          "type": "number",
+          "title": { "en": "Target Temperature" }
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "id": "target_temperature.hot_water",
+      "title": {
+        "en": "Set hot water target temperature"
+      },
+      "titleFormatted": {
+        "en": "Set hot water target temperature to [[temperature]]"
+      },
+      "highlight": true,
+      "args": [
+        {
+          "type": "range",
+          "name": "temperature",
+          "title": { "en": "Target" },
+          "min": 35,
+          "max": 70,
+          "step": 1,
+          "label": "°C",
+          "labelDecimals": 0
+        }
+      ]
+    },
+    {
+      "id": "target_temperature.heating",
+      "title": {
+        "en": "Set heating (comfort) target temperature"
+      },
+      "titleFormatted": {
+        "en": "Set heating (comfort) target temperature to [[temperature]]"
+      },
+      "highlight": true,
+      "args": [
+        {
+          "type": "range",
+          "name": "temperature",
+          "title": { "en": "Target" },
+          "min": 5,
+          "max": 30,
+          "step": 0.5,
+          "label": "°C",
+          "labelDecimals": 1
+        }
+      ]
+    },
+    {
+      "id": "target_temperature.heating_eco",
+      "title": {
+        "en": "Set heating (eco) target temperature"
+      },
+      "titleFormatted": {
+        "en": "Set heating (eco) target temperature to [[temperature]]"
+      },
+      "highlight": true,
+      "args": [
+        {
+          "type": "range",
+          "name": "temperature",
+          "title": { "en": "Target" },
+          "min": 5,
+          "max": 30,
+          "step": 0.5,
+          "label": "°C",
+          "labelDecimals": 1
+        }
+      ]
+    },
+    {
+      "id": "heat_pump_mode",
+      "title": {
+        "en": "Set hot water mode"
+      },
+      "titleFormatted": {
+        "en": "Set hot water mode to [[mode]]"
+      },
+      "highlight": true,
+      "args": [
+        {
+          "name": "mode",
+          "type": "dropdown",
+          "title": { "en": "Mode" },
+          "values": [
+            { "id": "off", "title": { "en": "Off" } },
+            { "id": "auto", "title": { "en": "Auto" } }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hot_water_boost",
+      "title": {
+        "en": "Boost hot water"
+      }
+    }
+  ]
+}

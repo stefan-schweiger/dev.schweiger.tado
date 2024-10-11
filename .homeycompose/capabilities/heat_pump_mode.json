@@ -1,0 +1,11 @@
+{
+  "type": "enum",
+  "title": { "en": "Heat Pump Mode" },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker",
+  "values": [
+    { "id": "off", "title": { "en": "Off" } },
+    { "id": "auto", "title": { "en": "Auto" } }
+  ]
+}
